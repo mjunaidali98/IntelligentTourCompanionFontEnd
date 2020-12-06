@@ -8,8 +8,18 @@ import TwitterIcon from '@material-ui/icons/Twitter';
 import SearchIcon from '@material-ui/icons/Search';
 
 
-export default class headers extends Component {
 
+
+export default class headers extends Component {
+  gotoInstagram(){ 
+    window.location.href='https://www.instagram.com/i_tourcompanion/';
+  }
+  goToFacebook(){
+    window.location.href='https://web.facebook.com/Itourcompanion';
+  }
+  gotoTwitter(){ 
+    window.location.href='https://twitter.com/itourcompanion';
+  }
   render() {
     return (
       <Navbar className="navbar" scrolling bg="white" expand="lg" fixed="top">
@@ -37,9 +47,9 @@ export default class headers extends Component {
               <i className="fa fa-phone"></i> +92 333 3376949
                       </p>
           </div>
-          <FacebookIcon id="social" style={{ marginRight: '10px' }} color="primary" />
-          <InstagramIcon id="social" style={{ marginRight: '10px' }} color="secondary" />
-          <TwitterIcon id="social" style={{ marginRight: '10px' }} color="primary" />
+          <FacebookIcon id="social" onClick={this.goToFacebook} style={{ marginRight: '10px' }} color="primary" />
+          <InstagramIcon id="social"  onClick={this.gotoInstagram} style={{ marginRight: '10px' }} color="secondary" />
+          <TwitterIcon id="social"  onClick={this.gotoTwitter} style={{ marginRight: '10px' }} color="primary" />
           <div className="search_icon">
             <Link
               to="#"

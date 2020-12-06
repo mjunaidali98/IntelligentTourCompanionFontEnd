@@ -8,7 +8,13 @@ import 'react-toastify/dist/ReactToastify.css';
 import '../componentcss/LoginView.css';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import PersonIcon from '@material-ui/icons/Person';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
 import { ToastContainer, toast } from 'react-toastify';
+
 class signin extends Component {
   constructor(props) {
     super(props);
@@ -20,8 +26,10 @@ class signin extends Component {
       password: localStorage.getItem('password'),
       checkbox: false,
       hiddenpass: false,
+      title: "User"
     };
     this.onSubmit = this.onSubmit.bind(this);
+
   }
 
   togglepass = () => {
@@ -36,6 +44,12 @@ class signin extends Component {
       email: this.email,
     };
   };
+  handleradioChange = (e) => { 
+    e.preventDefault();
+    this.setState({
+      title: e.target.value
+    })
+  }
 
   onSubmit = (e) => {
     e.preventDefault();
@@ -93,14 +107,44 @@ class signin extends Component {
     return (
       <div className="signin">
         <div className="login-form">
-          <form onSubmit={this.onSubmit}>
+          <form onSubmit={this.onSubmit} style={{ height: '500px' }}>
             <div className="avatar">
               <img src="/assets/img/logo.png" alt="Avatar" />
             </div>
-            <h2 className="text-center" id="logtext">
-              Member Login
-            </h2>
-            <div className="form-group">
+        
+    <h4 style={{ textAlign:'center', color: ' red', marginTop:'25px', fontSize:'30px'}}>Login As</h4>
+            <FormControl component="fieldset" style={{marginTop:'-10px'}}>
+              <RadioGroup row aria-label="position" name="position" defaultValue="User">
+                <FormControlLabel
+                  value="User"
+                  control={<Radio color="primary" />}
+                  label="User"
+                  labelPlacement="start"
+                  style={{ color: ' #001529' }}
+                  onChange={this.handleradioChange}
+                
+                />
+                <FormControlLabel
+                  value="Tour Guide"
+                  control={<Radio color="primary" />}
+                  label="Tour Guide"
+                  labelPlacement="start"
+                  style={{ color: ' #001529' }}
+                  onChange={this.handleradioChange}
+    
+                />
+                <FormControlLabel
+                  value="Transport Provider"
+                  control={<Radio color="primary" />}
+                  label="Transport"
+                  labelPlacement="start"
+                  style={{ color: ' #001529' }}
+                  onChange={this.handleradioChange}
+                />
+              </RadioGroup>
+            </FormControl>
+            <h2 className="text-center" id="logtext" style={{marginTop:'-5px'}}>{this.state.title}</h2>
+            <div className="form-group" style={{marginTop:'-15px'}}>
               <input
                 type="name"
                 className="form-control"
@@ -155,7 +199,7 @@ class signin extends Component {
               <label className="float-left form-check-label">
                 <input
                   type="checkbox"
-                  style={{ marginLeft: '10px' }}
+                  style={{ marginLeft: '15px' }}
                   name="checkbox"
                   onChange={(e) =>
                     this.setState({ checkbox: e.target.checked })
@@ -171,11 +215,13 @@ class signin extends Component {
               >
                 Forgot Password?
               </Link>
+
             </div>
             <br />
+           
             <p className="text-center small" id="signup">
               Don't have an account?&nbsp;
-              <Link id="signnup" to="/signup">
+              <Link id="signnup" to={{ pathname: `/signup`, state: this.state.title }}>
                 Sign up here!
               </Link>
             </p>

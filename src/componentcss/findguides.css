@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Titillium&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Titillium+Web:300,400,700');
 * {
@@ -7,10 +7,10 @@
 }
 .canvasguide {
   height: 820px;
-  background-image: url("https://hdwallsource.com/img/2016/7/kid-backpack-computer-wallpaper-49645-51321-hd-wallpapers.jpg");
+  background-image: url('https://hdwallsource.com/img/2016/7/kid-backpack-computer-wallpaper-49645-51321-hd-wallpapers.jpg');
   background-size: cover;
   background-position: center;
-  margin-left: 0px; 
+  margin-left: 0px;
 }
 .guidelocation::placeholder {
   color: black;
@@ -69,7 +69,7 @@
 .guidesearch {
   width: 150px;
   height: 60px;
-  color: black; 
+  color: black;
   font-family: 'Titillium Web', sans-serif;
   border-radius: 5px;
   border: 1px solid white;
@@ -78,7 +78,6 @@
   font-weight: bold;
   background-color: lightgray;
   text-align: center;
-
 }
 .guidesearch:hover {
   background-color: #001529;
@@ -123,7 +122,6 @@
     margin-bottom: 10px;
     margin-left: 10px;
   }
-
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
@@ -140,13 +138,13 @@
     font-size: 14px;
   }
 
-  .guidelocation{
+  .guidelocation {
     width: 230px;
     margin-bottom: 10px;
     margin-left: 10px;
     float: left;
   }
-  .guidesearch{
+  .guidesearch {
     margin-left: -90px;
   }
 }
@@ -172,8 +170,7 @@
     margin-left: 10px;
     float: left;
   }
-  .guidesearch{
+  .guidesearch {
     margin-left: -220px;
   }
-
 }

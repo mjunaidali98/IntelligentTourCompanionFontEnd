@@ -422,7 +422,7 @@ const RenderPlaces = ({
                             marginTop: '5px',
                           }}
                         >
-                          <UncontrolledCarousel  id="carousel" items={items} />
+                          <UncontrolledCarousel height='218px' width='231px'   id="carousel" items={items} />
                         </div>
                         <b style={{fontSize: '15px', color: 'black' ,fontFamily: 'Titillium Web, sans-serif'}}>
                           Place Location:&nbsp;&nbsp;

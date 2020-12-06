@@ -18,8 +18,8 @@ export class geocoder extends Component {
         console.log(results);
         try {
           this.setState({
-            Lng: results[0].geometry.viewport.Va.i,
-            Lat: results[0].geometry.viewport.Za.i,
+            Lng: results[0].geometry.location.lng(),
+            Lat: results[0].geometry.location.lat(),
           });
           console.log(
             this.state.Lat.toPrecision(7),

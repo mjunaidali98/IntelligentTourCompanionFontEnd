@@ -5,8 +5,6 @@ import Hotels from './hotels';
 import '../componentcss/hotel.css';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
-import ReactSpinner from 'react-bootstrap-spinner';
-import Loader from 'react-loader-spinner';
 
 export class findhotel extends Component {
   constructor(props) {
@@ -19,13 +17,33 @@ export class findhotel extends Component {
       error: null,
       Hotels: null,
       loading: false,
+      hotelPhone: null,
+      hotelWebsite: null,
     };
     this.clickme = this.clickme.bind(this);
     this.clickHandler = this.clickHandler.bind(this);
     this.hideModal = this.hideModal.bind(this);
   }
-  clickHandler(id) {
+  async clickHandler(id) {
     this.setState({ activeModal: id });
+    await axios
+      .get(
+        `https://maps.googleapis.com/maps/api/place/details/json?placeid=${id}&key=AIzaSyD0FFwKL9zAZIpjkM9zf7CKQeNoFUIE6Ss`,
+        {
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+            'x-requested-with': 'XMLHttpRequest',
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res.data);
+        this.setState({
+          hotelPhone: res.data.result.international_phone_number,
+          hotelWebsite: res.data.result.website,
+        });
+      });
   }
 
   hideModal() {
@@ -34,13 +52,12 @@ export class findhotel extends Component {
   componentDidMount() {
     var inputori = document.getElementById('address');
     var options = {
-      // types: ['(cities)'],
       componentRestrictions: { country: 'pk' },
     };
     var autocomplete = new google.maps.places.Autocomplete(inputori, options);
   }
 
-  clickme = async (e) => {
+  clickme(e) {
     e.preventDefault();
     var geocoder = new google.maps.Geocoder();
     const address = document.getElementById('address').value;
@@ -48,41 +65,34 @@ export class findhotel extends Component {
       if (status === 'OK') {
         console.log(results);
         try {
+          let longitude = results[0].geometry.location.lng();
+          let latitude = results[0].geometry.location.lat();
           this.setState({
-            Lng: results[0].geometry.bounds.Va.j,
-            Lat: results[0].geometry.bounds.Za.i,
+            Lng: longitude.toPrecision(6),
+            Lat: latitude.toPrecision(6),
           });
           this.setState({
             loading: true,
           });
-          console.log(
-            this.state.Lat.toPrecision(6),
-            this.state.Lng.toPrecision(6)
-          );
+          console.log(this.state.Lat, this.state.Lng);
           axios
             .get(
-              // `https://tripadvisor1.p.rapidapi.com/hotels/list?offset=0&currency=PKR&limit=30&order=asc&lang=en_US&sort=recommended&location_id=${this.state.Lat}%252C${this.state.Lng}&adults=1&checkin=3020-10-1&rooms=1&nights=2&maxResults=24`,
-              `https://tripadvisor1.p.rapidapi.com/hotels/list?offset=0&currency=PKR&limit=30&order=asc&lang=en_US&sort=recommended&location_id=${this.state.Lat}%252C%20${this.state.Lng}&adults=0&checkin=-&rooms=0&nights=0`,
-
+              `https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyD0FFwKL9zAZIpjkM9zf7CKQeNoFUIE6Ss&radius=5000&type=lodging&pagetoken=&location=${this.state.Lat},${this.state.Lng}&keyword=Hotel&rankby=prominence`,
               {
-                method: 'GET',
                 headers: {
                   'Access-Control-Allow-Origin': '*',
                   'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-                  'x-rapidapi-host': 'tripadvisor1.p.rapidapi.com',
-                  'x-rapidapi-key':
-                    '4b9bc97b37msh97a76aea744c532p1e8e09jsndbeae1f178a3',
-
-                  // "x-rapidapi-key": "519ede5194msh14ab92df892f8a5p17cb66jsn7bee35f6cb2f"
+                  'x-requested-with': 'XMLHttpRequest',
                 },
               }
             )
             .then((res) => {
-              console.log(res);
+              console.log(res.data);
               this.setState({
-                Hotels: res.data.data,
+                Hotels: res.data.results,
                 loading: true,
               });
+              console.log(this.state.Hotels);
               setTimeout(() => {
                 this.setState({ loading: false });
               }, 100);
@@ -98,7 +108,7 @@ export class findhotel extends Component {
         toast.error("Sorry couldn't find this place, try another one.");
       }
     });
-  };
+  }
 
   render() {
     const { loading } = this.state;
@@ -117,7 +127,7 @@ export class findhotel extends Component {
         />
         <h3 style={{ fontFamily: 'Titillium Web' }}>Search Hotels</h3>
         <div>
-          <form className="outlineboxhotel" onSubmit={this.clickme}>
+          <form className="outlineboxhotel" onSubmit={(e) => this.clickme(e)}>
             <input
               id="address"
               type="text"
@@ -141,6 +151,8 @@ export class findhotel extends Component {
               activeModal={this.state.activeModal}
               hideModal={this.hideModal}
               clickHandler={this.clickHandler}
+              hotelPhone={this.state.hotelPhone}
+              hotelWebsite={this.state.hotelWebsite}
             />
           </div>
         </div>

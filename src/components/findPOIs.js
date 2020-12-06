@@ -46,8 +46,8 @@ export class findPOIs extends Component {
         console.log(results);
         try {
         this.setState({
-          Lng: results[0].geometry.bounds.Va.j,
-          Lat: results[0].geometry.bounds.Za.i,
+          Lng: results[0].geometry.bounds.Sa.j,
+          Lat: results[0].geometry.bounds.Ya.i,
         });
         console.log(
           this.state.Lat.toPrecision(7),
@@ -67,7 +67,7 @@ export class findPOIs extends Component {
                 'Access-Control-Origin-Allow': '*',
                 'x-rapidapi-host': 'tripadvisor1.p.rapidapi.com',
                 'x-rapidapi-key':
-                  '4b9bc97b37msh97a76aea744c532p1e8e09jsndbeae1f178a3',
+                  '5f5afe642cmsh8befa9db62b33b0p1d8138jsna249698d4004',
               },
             }
           )
@@ -76,6 +76,7 @@ export class findPOIs extends Component {
               POIs: response.data.data,
               loading: true
             });
+            console.log('data: ' + JSON.stringify(this.state.POIs));
             setTimeout(() => {
               this.setState({ loading: false });
             }, 100);

@@ -8,14 +8,12 @@ export default class viewusers extends Component {
     users: [],
     upers:[]
   }; 
-  componentDidMount(){
+  componentWillMount(){
     axios.get(`http://localhost:3000/admin/viewusers`)
     .then(res=> {
       console.log(res);
       this.setState({upers: res.data});
     });
-
-
   }
 
   deletuser = (userid, username) => {
@@ -26,6 +24,7 @@ export default class viewusers extends Component {
          this.setState( {
           upers : this.state.upers.filter(user => user._id !== userid)
          });
+
        }
 
       }
@@ -34,12 +33,12 @@ export default class viewusers extends Component {
   render() {
     var check=false;
     return (
-      <div>
-        <h1 className="userlist">Member's List</h1>
-        <div class="Table-responsive">
-        <Table striped bordered hover variant="dark" id="table" style={{marginTop:"-30px"}}>
+      <div className="canvastransport" id="transportId" style={{height:'700px'}}>
+      <h3 style={{ fontFamily: 'Titillium Web', marginTop: '-100px', position:'relative', marginLeft:'250px'  }}>View Users</h3>
+          <div class="Table-responsive" >
+              <Table striped bordered hover id="table" id="userdetailstable" style={{ marginTop: "170px", overflowY:'scroll'}}>
         <thead>
-    <tr>
+    <tr style={{textAlign:'center'}}>
       <th>ID's</th>
       <th>Username</th>
       <th>First Name</th>
@@ -64,7 +63,7 @@ export default class viewusers extends Component {
             <td id="capital">
             {user.lastname}
             </td>
-            <td style={{color:'lightblue'}}>
+            <td style={{color:'darkblue'}}>
             {user.email}
             </td>
             <td>

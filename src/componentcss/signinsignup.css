@@ -19,7 +19,7 @@
   padding: 100px 0 30px;
   margin-bottom: 160px;
   opacity: 0.86;
-
+  height: 100%;
 }
 .login-form form {
   color: #7a7a7a;
@@ -31,6 +31,7 @@
   padding: 30px;
   position: relative;
   margin-top: 60px;
+  height: 600px;
 }
 .signin {
   background-size: cover;
@@ -39,7 +40,7 @@
 
 }
 #logtext{
-  font-size: 26px;
+  font-size: 18px;
   margin-left: 13px;
   color: #001529;
 }
@@ -142,6 +143,7 @@
   margin-top: -60px;
   margin-bottom: 60px;
   opacity: 0.86;
+  height: 820px;
 }
 input::-webkit-input-placeholder {
   font-size: 15px;

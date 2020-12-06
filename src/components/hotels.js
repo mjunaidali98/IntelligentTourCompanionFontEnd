@@ -1,20 +1,29 @@
 import React from 'react';
 import ModalMap from './ModalMap';
+import axios from 'axios';
 import pagenotfound from '../images/image-not-found.jpg';
 import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap';
-function RenderHotels({ hotels, clickHandler, hideModal, activeModal }) {
+import { Hotel } from '@material-ui/icons';
+function RenderHotels({
+  hotels,
+  clickHandler,
+  hideModal,
+  activeModal,
+  HotelPhone,
+  HotelWebsite,
+}) {
   if (hotels !== null) {
     return (
       <div className="containerhotel" style={{ marginLeft: '100px' }}>
         <div className="columnshotel">
           {hotels.map((hotel) => {
             return (
-              <div id="entry" key={hotel.location_id}>
+              <div id="entry" key={hotel.place_id}>
                 <img
                   src={
-                    hotel.photo === undefined
+                    hotel.photos == undefined
                       ? pagenotfound
-                      : hotel.photo.images.large.url
+                      : `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${hotel.photos[0].photo_reference}&key=AIzaSyD0FFwKL9zAZIpjkM9zf7CKQeNoFUIE6Ss`
                   }
                   alt={hotel.name}
                   className="img-fluid img-thumbnail"
@@ -24,13 +33,13 @@ function RenderHotels({ hotels, clickHandler, hideModal, activeModal }) {
                   <Button
                     className="viewButton"
                     color="primary"
-                    onClick={() => clickHandler(hotel.location_id)}
+                    onClick={() => clickHandler(hotel.place_id)}
                   >
                     <span id="hname">{hotel.name}</span>
                   </Button>
                 </div>
                 <Modal
-                  isOpen={activeModal === hotel.location_id}
+                  isOpen={activeModal === hotel.place_id}
                   toggle={hideModal}
                 >
                   <ModalHeader>
@@ -42,11 +51,11 @@ function RenderHotels({ hotels, clickHandler, hideModal, activeModal }) {
                       {hotel.name}
                     </b>
                     <br />
-                    <b style={{ color: '#001529' }}>Price range:&nbsp;&nbsp;</b>
+                    <b style={{ color: '#001529' }}>Vicinity:&nbsp;&nbsp;</b>
                     <b style={{ color: 'blue' }}>
-                      {hotel.price === undefined || ''
-                        ? 'Prices not available'
-                        : hotel.price}
+                      {hotel.vicinity === undefined || ''
+                        ? 'Not available'
+                        : hotel.vicinity}
                     </b>
                     <br />
                     <b style={{ color: '#001529' }}>Rating:&nbsp;&nbsp;</b>
@@ -56,12 +65,32 @@ function RenderHotels({ hotels, clickHandler, hideModal, activeModal }) {
                         : hotel.rating}
                     </b>
                     <br />
+                    <b style={{ color: '#001529' }}>Phone #:&nbsp;&nbsp;</b>
+                    <b style={{ color: 'blue' }}>
+                      {HotelPhone === undefined || ''
+                        ? 'Phone Number not available'
+                        : HotelPhone}
+                    </b>
+                    <br />
+                    <b style={{ color: '#001529' }}>
+                      Booking Website:&nbsp;&nbsp;
+                    </b>
+                    <a
+                      href={HotelWebsite}
+                      target="_Blank"
+                      style={{ color: 'blue' }}
+                    >
+                      {HotelWebsite === undefined || ''
+                        ? 'Website not available'
+                        : 'Visit Website'}
+                    </a>
+                    <br />
                     <b style={{ color: '#001529' }}>Location:</b>
                     <br />
                     <div id="map">
                       <ModalMap
-                        Lat={parseFloat(hotel.latitude)}
-                        Lng={parseFloat(hotel.longitude)}
+                        Lat={hotel.geometry.location.lat}
+                        Lng={hotel.geometry.location.lng}
                       />
                     </div>
                   </ModalBody>
@@ -97,6 +126,8 @@ const hotels = (props) => {
           activeModal={props.activeModal}
           hideModal={props.hideModal}
           clickHandler={props.clickHandler}
+          HotelPhone={props.hotelPhone}
+          HotelWebsite={props.hotelWebsite}
         />
       </div>
     );

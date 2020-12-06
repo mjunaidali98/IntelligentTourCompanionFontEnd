@@ -167,7 +167,7 @@ const RenderPlaces = ({
                             marginTop: '5px',
                           }}
                         >
-                          <UncontrolledCarousel items={items} />
+                          <UncontrolledCarousel height='180px' style={{height:'180px', width:'231px'}} width='231px' items={items} />
                         </div>
                         <b style={{ color: 'black' }}>
                           Place Location:&nbsp;&nbsp;

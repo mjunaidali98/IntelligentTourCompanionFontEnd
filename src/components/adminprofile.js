@@ -6,8 +6,13 @@ import Removedestination from '../components/removetopdestination';
 import ViewUser from '../components/viewusers';
 import { Layout, Menu } from 'antd';
 import Viewrequests from '../components/viewrequests';
+import AdminViewTransport from '../components/adminviewTransport';
 import ReactDOM from 'react-dom';
 import SecurityIcon from '@material-ui/icons/Security';
+import ViewGuideRequests from '../components/viewGuideRequests';
+import ViewApprovedGuides from '../components/viewApprovedGuides';
+//import  AdminViewTransport from '../components/Newvehicles';
+
 import {
   HomeOutlined,
   PieChartOutlined,
@@ -22,6 +27,9 @@ import {
   EditOutlined,
   UserOutlined,
   BarChartOutlined,
+  CarOutlined,
+  UsergroupAddOutlined,
+  ContactsOutlined,
 
 } from '@ant-design/icons';
 
@@ -31,17 +39,27 @@ const { SubMenu } = Menu;
 function addTopdestination() {
   ReactDOM.render(<Adddestination />, document.getElementById('content'));
 }
+function viewTransport() {
+  ReactDOM.render(<AdminViewTransport />, document.getElementById('content'));
+}
+
 function viewRequests() {
   ReactDOM.render(<Viewrequests />, document.getElementById('content'));
 }
 function editTopdestination() {
   ReactDOM.render(<Edittopdestination />, document.getElementById('content'));
-} 
+}
 function removeTopdestination() {
   ReactDOM.render(<Removedestination />, document.getElementById('content'));
 }
 function viewUsers() {
   ReactDOM.render(<ViewUser />, document.getElementById('content'));
+}
+function viewGuideRequests() {
+  ReactDOM.render(<ViewGuideRequests />, document.getElementById('content'));
+}
+function viewApprovedGuides() {
+  ReactDOM.render(<ViewApprovedGuides />, document.getElementById('content'));
 }
 
 class AdminProfile extends React.Component {
@@ -57,19 +75,19 @@ class AdminProfile extends React.Component {
 
   onCollapse = (collapsed) => {
     this.setState({ collapsed });
-    if(collapsed) {
-      ReactDOM.render(<SecurityIcon/>, document.getElementById('adminname'));
-      document.getElementById('welcome').style.fontSize='14px';
-      
+    if (collapsed) {
+      ReactDOM.render(<SecurityIcon />, document.getElementById('adminname'));
+      document.getElementById('welcome').style.fontSize = '14px';
+
     }
-    else{
-      document.getElementById('welcome').style.visibility='visible';
-      document.getElementById('adminname').style.visibility='visible';
-      ReactDOM.render( "Admin", document.getElementById('adminname'));
-      document.getElementById('welcome').style.fontSize='20px';
-      
+    else {
+      document.getElementById('welcome').style.visibility = 'visible';
+      document.getElementById('adminname').style.visibility = 'visible';
+      ReactDOM.render("Admin", document.getElementById('adminname'));
+      document.getElementById('welcome').style.fontSize = '20px';
+
     }
-  };  
+  };
   onSubmit = (e) => {
     localStorage.removeItem('token');
     window.location.reload();
@@ -82,7 +100,7 @@ class AdminProfile extends React.Component {
           collapsed={this.state.collapsed}
           onCollapse={this.onCollapse}
         >
-            <div className="logo" />
+          <div className="logo" />
           <h3 id="welcome"
             style={{ textAlign: 'center', marginTop: '20px', color: 'white', textTransform: 'capitalize' }}
           >
@@ -91,7 +109,7 @@ class AdminProfile extends React.Component {
           <h3 id="adminname"
             style={{ textAlign: 'center', marginTop: '20px', color: 'white' }}
           >
-           Admin
+            Admin
           </h3>
           <Menu id="sidebar" theme="dark" defaultSelectedKeys={['1']} mode="inline">
             <Menu.Item key="1" icon={<HomeOutlined />}>
@@ -105,9 +123,16 @@ class AdminProfile extends React.Component {
               </SubMenu>
             </SubMenu>
             <SubMenu key="sub2" icon={<CheckCircleOutlined />} title="View">
-              <Menu.Item key="5" icon={<BarChartOutlined/>}>Tours</Menu.Item>
-              <Menu.Item key="7" onClick={viewUsers} icon={<UserOutlined/>}>Users</Menu.Item>
-              <Menu.Item key="11" icon={<MailOutlined/>} onClick={viewRequests}>Responses</Menu.Item>
+              <Menu.Item key="5" icon={<BarChartOutlined />}>Tours</Menu.Item>
+              <Menu.Item key="7" onClick={viewUsers} icon={<UserOutlined />}>Users</Menu.Item>
+              <Menu.Item key="15" onClick={viewApprovedGuides} icon={<UserOutlined />}>
+                Approved Guides
+	              </Menu.Item>
+              <Menu.Item key="11" icon={<MailOutlined />} onClick={viewRequests}>Responses</Menu.Item>
+            </SubMenu>
+            <SubMenu key="sub3" icon={<ContactsOutlined />} title="Approve">
+            <Menu.Item key="13"onClick={viewGuideRequests} icon={<UsergroupAddOutlined />}>Tour Guides Requests</Menu.Item>
+              <Menu.Item key="14" onClick={viewTransport} icon={<CarOutlined />}>Transport</Menu.Item>
             </SubMenu>
             <Menu.Item key="2" icon={<SettingFilled />}>
               Manage Account
@@ -121,7 +146,7 @@ class AdminProfile extends React.Component {
           </Menu>
         </Sider>
         <Layout className="site-layout">
-          <div id="content">
+          <div id="content" style={{backgroundColor:'white'}}>
 
           </div>
 

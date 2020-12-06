@@ -24,6 +24,7 @@ class signup extends Component {
       errEmail: false,
       errPass: false,
       loading: false,
+      title: this.props.location.state
     };
     this.hideModal = this.hideModal.bind(this);
     this.activeModal = this.activeModal.bind(this);
@@ -50,6 +51,7 @@ class signup extends Component {
           email: this.state.email,
           phone: this.state.phone,
           password: this.state.password,
+   
         })
         .then((res) => {
           if (res.status) {
@@ -95,6 +97,7 @@ class signup extends Component {
           email: this.state.email,
           phone: this.state.phone,
           password: this.state.password,
+          accounttype: this.state.title,
         })
         .then((res) => {
           console.log(res);
@@ -119,13 +122,13 @@ class signup extends Component {
     return (
       <div className="signup">
         <div className="login-form" id="signupForm">
-          <form onSubmit={this.submit}>
+          <form onSubmit={this.submit} style={{height:'600px'}}>
             <div className="avatar">
               <img src="/assets/img/logo.png" alt="Avatar" />
             </div>
             <h2 className="text-center" id="signuptext">
-              Member Register
-            </h2>
+              {/* Registration */} {this.state.title}
+             </h2>
             <div id="box">
               <label id="labels">First Name:</label>
               <input

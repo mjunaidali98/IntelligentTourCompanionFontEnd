@@ -8,14 +8,12 @@ import Register from './pages/register';
 import UserDashboard from './pages/userDashboard';
 import AdminLog from './pages/adminLog';
 import AdminDashboard from './pages/adminDashboard';
-import FindGuide from './pages/findGuides';
 import WeatherCheck from './pages/findWeather';
 import About from './pages/about';
 import Contact from './pages/contact';
 import Forgot from './components/forgot';
+import SearchGuide from './components/tourguides';
 import Destination from './pages/topDestination';
-import HeaderDestination from './components/destination';
-import { createBrowserHistory } from 'history';
 import axios from 'axios';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
@@ -53,7 +51,7 @@ export default class App extends React.Component {
   };
 
   setUser = (user) => this.setState({ user: user });
-  setAdmin = (admin) => this.setState({ admin: admin });
+  sentAdmin = (admin) => this.setState({ admin: admin });
   render() {
     return (
       <div className="wrapper">
@@ -69,8 +67,8 @@ export default class App extends React.Component {
                 )}
               />
             ) : (
-              <Route path="/dashboard" render={({ props }) => <Login />} />
-            )}
+                <Route path="/dashboard" render={({ props }) => <Login />} />
+              )}
             <Route
               exact
               path="/dashboard"
@@ -81,14 +79,14 @@ export default class App extends React.Component {
             {!this.state.authenticate && this.state.adminAuth === false ? (
               <Route exact path="/login" render={({ props }) => <Login />} />
             ) : (
-              <Route
-                exact
-                path="/login"
-                render={(props) => (
-                  <UserDashboard {...props} user={this.state.user} />
-                )}
-              />
-            )}
+                <Route
+                  exact
+                  path="/login"
+                  render={(props) => (
+                    <UserDashboard {...props} user={this.state.user} />
+                  )}
+                />
+              )}
             <Route
               exact
               path="/dashboard"
@@ -105,36 +103,36 @@ export default class App extends React.Component {
                 )}
               />
             ) : (
-              [
-                <Route
-                  exact
-                  path="/maketrip"
-                  render={(props) => (
-                    <Login
-                      {...props}
-                      user={this.state.user}
-                      setUser={this.setUser}
-                    />
-                  )}
-                />,
-                <Route
-                  exact
-                  path="/login"
-                  render={(props) => (
-                    <Login
-                      {...props}
-                      user={this.state.user}
-                      setUser={this.setUser}
-                    />
-                  )}
-                />,
-                <Route
-                  exact
-                  path="/signup"
-                  render={(props) => <Register {...props} />}
-                />,
-              ]
-            )}
+                [
+                  <Route
+                    exact
+                    path="/maketrip"
+                    render={(props) => (
+                      <Login
+                        {...props}
+                        user={this.state.user}
+                        setUser={this.setUser}
+                      />
+                    )}
+                  />,
+                  <Route
+                    exact
+                    path="/login"
+                    render={(props) => (
+                      <Login
+                        {...props}
+                        user={this.state.user}
+                        setUser={this.setUser}
+                      />
+                    )}
+                  />,
+                  <Route
+                    exact
+                    path="/signup"
+                    render={(props) => <Register {...props} />}
+                  />,
+                ]
+              )}
             {this.state.authenticate && this.state.adminAuth === true ? (
               <Route
                 exact
@@ -144,8 +142,8 @@ export default class App extends React.Component {
                 )}
               />
             ) : (
-              <Route exact path="/adminDashboard" render={() => <AdminLog />} />
-            )}
+                <Route exact path="/adminDashboard" render={() => <AdminLog />} />
+              )}
             {this.state.authenticate && this.state.adminAuth === true ? (
               <Route
                 exact
@@ -155,8 +153,8 @@ export default class App extends React.Component {
                 )}
               />
             ) : (
-              <Route exact path="/itc-admin" render={() => <AdminLog />} />
-            )}
+                <Route exact path="/itc-admin" render={() => <AdminLog />} />
+              )}
 
             {/* Test */}
             {this.state.authenticate && this.state.adminAuth === false ? (
@@ -168,17 +166,14 @@ export default class App extends React.Component {
                 )}
               />
             ) : (
-              <Route exact path="/maketrip" render={() => <Login />} />
-            )}
-
-            <Route exact path="/findguides" component={FindGuide} />
+                <Route exact path="/maketrip" render={() => <Login />} />
+              )}
             <Route exact path="/about" component={About} />
             <Route exact path="/contact" component={Contact} />
             <Route exact path="/forgot" component={Forgot} />
-            {/* <Route exact path="/map" component={Map} /> */}
-            {/* <Route path="*" component={() => '404 Page Not Found'} /> */}
             <Route exact path="/destinations" component={Destination} />
             <Route exact path="/findWeather" component={WeatherCheck} />
+            <Route exact path="/searchguide" component={SearchGuide} />
           </Switch>
         </Router>
       </div>

@@ -13,7 +13,7 @@ import {
   LinkedinFilled,
   TwitterCircleFilled,
 } from '@ant-design/icons';
-import Axios from 'axios';
+
 
 export default class contact extends Component {
   constructor(props) {
@@ -110,25 +110,20 @@ export default class contact extends Component {
               <div className="social-media">
                 <ul style={{ textAlign: 'center' }}>
                   <li>
-                    <a href="">
+                    <a href="https://web.facebook.com/Itourcompanion">
                       <FacebookFilled id="soc" />
                     </a>
                   </li>
                   <li>
-                    <a href="">
+                    <a href="https://www.instagram.com/i_tourcompanion/">
                       <InstagramFilled id="soc" />
                     </a>
                   </li>
                   <li>
-                    <a href="">
+                    <a href="https://twitter.com/itourcompanion">
                       <span>
                         <TwitterCircleFilled id="soc" />
                       </span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="">
-                      <LinkedinFilled id="soc" />
                     </a>
                   </li>
                 </ul>
@@ -167,7 +162,7 @@ export default class contact extends Component {
                   id="message"
                   defaultValue={''}
                 />
-                <input type="submit" id="sbmt-btn" />
+                <button type="submit" id="sbmt-btn" >Submit</button>
                 <button type="reset" id="cancel-btn">
                   Cancel
                 </button>

@@ -4,6 +4,7 @@ import Header from '../components/header';
 export default class topplaces extends Component {
     render() {
         return (
+          <div>
           <Header/>
             <div className="popular_destination_area">
             <div className="container">
@@ -89,6 +90,7 @@ export default class topplaces extends Component {
                 </div>
               </div>
             </div>
+          </div>
           </div>
         )
     }

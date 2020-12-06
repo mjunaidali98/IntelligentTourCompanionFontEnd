@@ -1,5 +1,5 @@
 /*global google*/
-import React, { Component } from 'react';
+import React, { Component} from 'react';
 import { SearchOutlined } from '@ant-design/icons';
 import '../componentcss/map.css';
 import { ToastContainer, toast } from 'react-toastify';
@@ -46,15 +46,17 @@ class Map extends Component {
       },
       (result, status) => {
         if (status === google.maps.DirectionsStatus.OK) {
+          console.log("result:" + JSON.stringify(result)) ;
           this.setState({
             directions: result,
-            oriLng: result.routes[0].bounds.Va.i,
-            desLng: result.routes[0].bounds.Va.j,
-            oriLat: result.routes[0].bounds.Za.i,
-            desLat: result.routes[0].bounds.Za.j,
+            oriLng: result.routes[0].legs[0].start_location.lng,
+            desLng: result.routes[0].legs[0].end_location.lng,
+            oriLat: result.routes[0].legs[0].start_location.lat,
+            desLat: result.routes[0].legs[0].end_location.lat,
             distance: result.routes[0].legs[0].distance.text,
             time: result.routes[0].legs[0].duration.text,
           });
+          console.log("directions " + this.state.directions);
           document.getElementById('routedetails').style.visibility = 'visible';
         } else {
           toast.error('Enter correct origin and destination.');
@@ -74,7 +76,7 @@ class Map extends Component {
       <GoogleMap
         id="mapfix"
         defaultCenter={{ lat: 28.3949, lng: 84.124 }}
-        defaultZoom={5.7}
+        defaultZoom={6}
       >
         <DirectionsRenderer directions={this.state.directions} />
       </GoogleMap>
@@ -102,7 +104,7 @@ class Map extends Component {
           }
           mapElement={<div id="mapitself" style={{ height: `100%` }} />}
         />
-        <form id="mapinputbox" onSubmit={this.props.getDistance}>
+        <form id="mapinputbox"  onSubmit={this.props.getDistance}>
           <input
             id="ori"
             type="text"
@@ -132,7 +134,7 @@ class Map extends Component {
           </select>
 
           <button id="search" type="submit" onClick={this.clickme}>
-            <SearchOutlined />
+            <SearchOutlined style={{verticalAlign: '1px'}} />
             &nbsp;Search
           </button>
         </form>

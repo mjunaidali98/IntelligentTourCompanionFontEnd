@@ -68,7 +68,8 @@ export default class Adddestination extends React.Component {
       this.maxSelectFile(event) &&
       this.checkMimeType(event) &&
       this.checkMimeType(event)
-    ) {
+    ) 
+    { 
       this.setState({ image: event.target.files }, () =>
         console.log(this.state.image)
       );
@@ -89,7 +90,6 @@ export default class Adddestination extends React.Component {
     var locname = document.getElementById('placename').value.split(',')[0];
     var locname = locname.split('-')[0];
     this.state.name=locname;
-    // this.state.name=document.getElementById('placename').value;
     this.state.location=document.getElementById('location').value;
     const data = new FormData();
     data.append('name', this.state.name);
@@ -105,6 +105,7 @@ export default class Adddestination extends React.Component {
           this.setState({
             loaded: (ProgressEvent.loaded / ProgressEvent.total) * 100,
           });
+          console.log("Zee"+ data);
         },
       })
       .then((res) => {
@@ -173,7 +174,7 @@ export default class Adddestination extends React.Component {
               required="required"
               className="form-control"
               accept="image/*"
-              multiple
+              multiple  
               onChange={this.onChangeHandler}
             />
             <div

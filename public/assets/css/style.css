@@ -6851,6 +6851,23 @@ h6 {
   display: block;
   animation: automated 3s 100;
 }
+.icon_manualtrip{
+  display: block;
+  animation: manualtrip 3s 100;
+}
+
+@keyframes manualtrip {
+  0% {
+    margin-left: 0;
+  }
+  50% {
+    margin-left: 115px;
+  }
+  100% {
+    margin-left: 230px;
+  }
+}
+
 @keyframes route{
 
   50% {
@@ -6869,8 +6886,6 @@ h6 {
     visibility: visible;
   }
 }
-
-
 
 @keyframes manual {
   0% {

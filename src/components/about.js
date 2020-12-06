@@ -1,17 +1,6 @@
 import React, { Component } from 'react';
-import { Link, Redirect } from 'react-router-dom';
-import { withRouter } from "react-router-dom";
-import { useHistory } from "react-router-dom";
-import {browserHistory } from 'react-router';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import '../componentcss/about.css';
-import Hotel from "../components/findHotel";
-import Guide from "../components/tourguides";
-import Login from '../pages/login';
-import UserDashboard from '../pages/userDashboard';
-import Map from '../pages/findDistance';
-import axios from 'axios';
-import Poi from '../components/findPOIs';
+
 import {
     EditOutlined,
     CloudOutlined,
@@ -20,58 +9,8 @@ import {
     EnvironmentOutlined,
     SettingOutlined,
 } from '@ant-design/icons';
-import TouchRipple from '@material-ui/core/ButtonBase/TouchRipple';
-
-var check = false;
 
 export default class about extends Component {
-    constructor() {
-        super();
-        this.state = { user: {}, admin: {}, adminAuth: false, authenticate: false };
-    }
-    componentDidMount = () => {
-        axios
-            .get('http://localhost:3000/users', {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem('token')}`,
-                },
-            })
-            .then((res) => {
-                console.log(res);
-                if (res.data.admin === false) {
-                    this.setState({
-                        user: res.data,
-                        authenticate: true,
-                        adminAuth: res.data.admin,
-                    });
-                    check = true;
-                    console.log("mai chal raha" + this.state.authenticate)
-                } else {
-                    this.setState({
-                        admin: res.data,
-                        authenticate: true,
-                        adminAuth: res.data.admin,
-                    });
-                    check = true;
-                    console.log(" nhi mai chal raha")
-                }
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-        console.log("zee is " + this.state.authenticate);
-    };
-
-    setUser = (user) => this.setState({ user: user });
-    setAdmin = (admin) => this.setState({ admin: admin });
-
-
-    goTofunction() {
-
-
-    }
-
-
     render() {
         return (
             <div className="services">

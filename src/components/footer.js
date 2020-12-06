@@ -1,6 +1,16 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 class footer extends Component {
+  gotoInstagram(){ 
+    window.location.href='https://www.instagram.com/i_tourcompanion/';
+  }
+  gotoFacebook(){
+    window.location.href='https://web.facebook.com/Itourcompanion';
+  }
+  gotoTwitter(){ 
+    window.location.href='https://twitter.com/itourcompanion';
+  }
+
   render() {
     return (
       <footer className="footer">
@@ -24,24 +34,18 @@ class footer extends Component {
                   <div className="socail_links">
                     <ul>
                       <li>
-                        <Link to="https://www.facebook.com/m.junaidali.110">
+                        <Link onClick={this.gotoFacebook}>
                           <i className="ti-facebook" />
                         </Link>
                       </li>
                       <li>
-                        <Link to="https://www.twitter.com/mjas110">
+                        <Link onClick={this.gotoTwitter}>
                           <i className="ti-twitter-alt" />
                         </Link>
                       </li>
                       <li>
-                        <Link to="https://www.instagram.com/junaid_110/">
+                        <Link onClick={this.gotoInstagram}>
                           <i className="fa fa-instagram" />
-                        </Link>
-                      </li>
-
-                      <li>
-                        <Link to="">
-                          <i className="fa fa-youtube-play" />
                         </Link>
                       </li>
                     </ul>
@@ -69,28 +73,22 @@ class footer extends Component {
                   <h3 className="footer_title">Popular destination</h3>
                   <ul className="links double_links">
                     <li>
-                      <Link to="/">Neelum Valley</Link>
+                      <Link to="/destinations">Neelum Valley</Link>
                     </li>
                     <li>
-                      <Link to="/">Hunza</Link>
+                      <Link to="/destinations">Hunza</Link>
                     </li>
                     <li>
-                      <Link to="/">Swat</Link>
+                      <Link to="/destinations">Swat valley</Link>
                     </li>
                     <li>
-                      <Link to="/">Kalash Valley</Link>
+                      <Link to="/destinations">Kaghan valley</Link>
                     </li>
                     <li>
-                      <Link to="/">Kaghan</Link>
+                      <Link to="/destinations">Murree</Link>
                     </li>
                     <li>
-                      <Link to="/">Murree Hills</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Shandur Pas</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Rawalakot</Link>
+                      <Link to="/destinations">Shandur Pass</Link>
                     </li>
                   </ul>
                 </div>

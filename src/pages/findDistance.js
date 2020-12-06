@@ -40,12 +40,6 @@ export class findDistance extends Component {
             travelDistance: res.data.route.distance * 1.60934,
             travelTime: res.data.route.formattedTime,
             fuelUsed: res.data.route.fuelUsed * 3.78541,
-            origin: `${res.data.route.locations[0].adminArea5},${res.data.route.locations[0].adminArea1}`,
-            destination: `${res.data.route.locations[1].adminArea5},${res.data.route.locations[1].adminArea1}`,
-            originLat: res.data.route.locations[0].displayLatLng.lat,
-            originLng: res.data.route.locations[0].displayLatLng.lng,
-            destLng: res.data.route.locations[1].latLng.lng,
-            destLat: res.data.route.locations[1].latLng.lat,
           });
           if (
             res.data.route.locations[0].adminArea1 === 'PK' &&
